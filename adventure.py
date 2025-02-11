@@ -71,7 +71,7 @@ def display_inventory(inventory):
         print("Your inventory is empty.")
     else:
         print("Your inventory:")
-        for i, item in enumerate(inventory, 0):
+        for i in enumerate(inventory, 0):
             print(f"{i+1}. {inventory[i]}")
 
 def enter_dungeon(player_health, inventory, dungeon_rooms):
@@ -82,7 +82,7 @@ def enter_dungeon(player_health, inventory, dungeon_rooms):
         try:
             rooms[0] = "trying to change the tuple"
         except TypeError as e:
-            print("Error:", e)
+            print("Tuples are immutable Error:", e)
 
         if item:
             print(f"You found a {item} in the room.")
