@@ -72,14 +72,16 @@ def display_inventory(inventory):
     else:
         print("Your inventory:")
         for i in range(1, len(inventory)):
-            print(i+". "+ inventory[i])
+            print(f"{i}. {inventory[i]}")
 
 def enter_dungeon(player_health, inventory, dungeon_rooms):
+    """ Enter Dungeon """
     for rooms in dungeon_rooms:
         room_description, item, challenge_type, challenge_outcome = rooms
         print(room_description)
 
         if item:
+            print(f"You found a {item} in the room.")
             inventory = acquire_item(inventory, item)
         if challenge_type == "puzzle":
             print("You encounter a puzzle!")
