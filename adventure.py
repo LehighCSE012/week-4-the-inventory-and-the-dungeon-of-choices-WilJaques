@@ -72,7 +72,7 @@ def display_inventory(inventory):
     else:
         print("Your inventory:")
         for i in range(1, len(inventory)):
-            print(i,". ", inventory[i])
+            print(i+". "+ inventory[i])
 
 def enter_dungeon(player_health, inventory, dungeon_rooms):
     for rooms in dungeon_rooms:
@@ -87,7 +87,7 @@ def enter_dungeon(player_health, inventory, dungeon_rooms):
             if skip == "skip":
                 print("You skipped the puzzle.")
             else:
-                if random.choice([0, 1]) == 0:
+                if random.choice([True, False]):
                     print(challenge_outcome[0])
                     player_health += challenge_outcome[2] * -1
                 else:
@@ -98,7 +98,7 @@ def enter_dungeon(player_health, inventory, dungeon_rooms):
             print("You see a potential trap!")
             disarm = input("Do you want to disarm or bypass the trap?")
             if disarm == "disarm":
-                if random.choice([0, 1]) == 0:
+                if random.choice([True, False]):
                     print(challenge_outcome[0])
                     player_health += challenge_outcome[2] * -1
                 else:
