@@ -71,7 +71,7 @@ def display_inventory(inventory):
         print("Your inventory is empty.")
     else:
         print("Your inventory:")
-        for i in range(0, len(inventory)):
+        for i, item in enumerate(inventory, 0):
             print(f"{i+1}. {inventory[i]}")
 
 def enter_dungeon(player_health, inventory, dungeon_rooms):
@@ -79,6 +79,10 @@ def enter_dungeon(player_health, inventory, dungeon_rooms):
     for rooms in dungeon_rooms:
         room_description, item, challenge_type, challenge_outcome = rooms
         print(room_description)
+        try:
+            rooms[0] = "trying to change the tuple"
+        except TypeError as e:
+            print("Error:", e)
 
         if item:
             print(f"You found a {item} in the room.")
@@ -128,8 +132,13 @@ def main():
       ("You skillfully avoid the trap!", "You triggered a trap!", -10)),
     ("A grand hall with a shimmering pool", "healing potion", "none", None)
     ]
-    dungeon_rooms.append(("A small room with a locked chest", "treasure", "puzzle",
-                    ("You cracked the code!", "The chest remains stubbornly locked.", -5)))
+    new_room = [("A small room with a locked chest", "treasure", "puzzle",
+                    ("You cracked the code!", "The chest remains stubbornly locked.", -5))]
+    # I am using this to change the last element to this new tuple
+    dungeon_rooms.extend(new_room)
+    # I am then using this to remove last element and test the pop function
+    dungeon_rooms.pop()
+
 
     has_treasure = random.choice([True, False]) # Randomly assign treasure
 
