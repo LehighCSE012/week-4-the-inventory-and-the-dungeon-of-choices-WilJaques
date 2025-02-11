@@ -71,7 +71,7 @@ def display_inventory(inventory):
         print("Your inventory is empty.")
     else:
         print("Your inventory:")
-        for i in range(1, len(inventory)):
+        for i, item in enumerate(inventory, 1):
             print(f"{i}. {inventory[i]}")
 
 def enter_dungeon(player_health, inventory, dungeon_rooms):
