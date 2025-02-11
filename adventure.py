@@ -12,8 +12,7 @@ def handle_path_choice(player_health):
     if path == "left":
         print("You encounter a friendly gnome who heals you for 10 health points.")
         updated_player_health = player_health + 10
-        if updated_player_health > 100:
-            updated_player_health = 100
+        updated_player_health = min(updated_player_health, 100)
     else:
         print("You fall into a pit and lose 15 health points.")
         updated_player_health = player_health - 15
@@ -72,7 +71,7 @@ def display_inventory(inventory):
         print("Your inventory is empty.")
     else:
         print("Your inventory:")
-        for i in range(0, len(inventory)):
+        for i in range(1, len(inventory)):
             print(i,". ", inventory[i])
 
 def enter_dungeon(player_health, inventory, dungeon_rooms):
@@ -107,11 +106,11 @@ def enter_dungeon(player_health, inventory, dungeon_rooms):
                     player_health += challenge_outcome[2]
         elif challenge_type == "none":
             print("There doesn't seem to be a challenge in this room. You move on.")
-        
         if player_health <= 0:
             print("You are barely alive!")
 
         display_inventory(inventory)
+    return player_health, inventory
 
 
 def main():
@@ -121,13 +120,13 @@ def main():
     has_treasure = False
     inventory = []
     dungeon_rooms = [
-    ("A dusty old library", "key", "puzzle", 
+    ("A dusty old library", "key", "puzzle",
      ("You solved the puzzle!", "The puzzle remains unsolved.", -5)),
     ("A narrow passage with a creaky floor", None, "trap",
       ("You skillfully avoid the trap!", "You triggered a trap!", -10)),
     ("A grand hall with a shimmering pool", "healing potion", "none", None)
     ]
-    dungeon_rooms.append(("A small room with a locked chest", "treasure", "puzzle", 
+    dungeon_rooms.append(("A small room with a locked chest", "treasure", "puzzle",
                     ("You cracked the code!", "The chest remains stubbornly locked.", -5)))
 
     has_treasure = random.choice([True, False]) # Randomly assign treasure
@@ -138,7 +137,7 @@ def main():
 
     check_for_treasure(treasure_obtained_in_combat) # Or has_treasure, depending on logic
 
-    enter_dungeon(player_health, inventory, dungeon_rooms)
+    player_health, inventory = enter_dungeon(player_health, inventory, dungeon_rooms)
     print(player_health)
 
 if __name__ == "__main__":
