@@ -91,7 +91,7 @@ def enter_dungeon(player_health, inventory, dungeon_rooms):
             else:
                 if random.choice([True, False]):
                     print(challenge_outcome[0])
-                    player_health += challenge_outcome[2] * -1
+                    player_health += challenge_outcome[2]
                 else:
                     print(challenge_outcome[1])
                     player_health += challenge_outcome[2]
